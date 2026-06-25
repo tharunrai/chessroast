@@ -131,7 +131,8 @@ export default function Home() {
               onShareClick={() => setIsShareModalOpen(true)}
             />
 
-            <RoastReportSection roast={roast} profile={profile} />
+            <RoastReportSection roast={roast} />
+
 
             <GameList
               games={games}

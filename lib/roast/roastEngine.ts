@@ -17,29 +17,30 @@ export async function generateAIProfileRoast(profile: PlayerProfile): Promise<Ro
 - Favorite Opening: ${profile.favoriteOpening}
 - Preferred Time Control: ${profile.preferredTimeControl}
 
-Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be written in FIRST-PERSON voice — as if the chess player is confessing and roasting themselves (use "I", "I am", "My", "I always", "I never"). This makes it funnier and more personal. Return a JSON object matching this exact schema:
+Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be written in third-PERSON voice — as if the Third person is roastin the chess player  (use "You", "You are", "Your", "You always", "You never"). This makes it funnier and more personal. Return a JSON object matching this exact schema:
 {
-  "overview": "Short 1-sentence funny overview of the player in first-person",
+  "overview": "Short 2-sentence funny overview of the player in third-person",
   "roastParagraphs": [
-    "Paragraph 1 in first-person roasting ELO rating tier and bracket",
-    "Paragraph 2 in first-person roasting favorite opening and opening knowledge/theory",
-    "Paragraph 3 in first-person roasting win rate, wins vs losses, and draw patterns",
-    "Paragraph 4 in first-person roasting typical blunder rate and tactical patterns",
-    "Paragraph 5 in first-person roasting preferred time control and time management",
-    "Paragraph 6 first-person devastating final stand-up Roast punchline summary"
+    "Paragraph 1 in third-person roasting ELO rating tier and bracket",
+    "Paragraph 2 in third-person roasting favorite opening and opening knowledge/theory",
+    "Paragraph 3 in third-person roasting win rate, wins vs losses, and draw patterns",
+    "Paragraph 4 in third-person roasting typical blunder rate and tactical patterns",
+    "Paragraph 5 in third-person roasting preferred time control and time management",
+    "Paragraph 6 third-person devastating final stand-up Roast punchline summary",
+    "Paragraph 7 in third-person roasting the player's chess personality it should be more personal no mercy and savage"
   ],
-  "biggestStrength": "Witty backhanded compliment on their secret chess talent (first-person)",
-  "biggestWeakness": "Savage comedic observation on their fatal flaw (first-person)",
+  "biggestStrength": "Witty backhanded compliment on their secret chess talent (third-person)",
+  "biggestWeakness": "Savage comedic observation on their fatal flaw (third-person)",
   "improvementTips": [
     "Brutally savage, emotionally devastating chess improvement dark roast tip 1",
     "Brutally savage dark roast tip 2",
     "Brutally savage dark roast tip 3",
     "Brutally savage dark roast tip 4",
-    "Brutally savage dark roast tip 5",
-    "Brutally savage dark roast tip 6"
+    "Brutally savage dark humourous roast tip 5",
+    "Brutally savage dark humourous roast tip 6"
   ],
-  "roastScore": 8.7,
-  "verdictBadge": "COOKED 🔥",
+  "roastScore": "Numeric roast score from 6 to 10.0, where 10.0 is the most devastatingly roasted, most of the roast should be about the player's weaknesses and flaws(mostly above 8.0). The score should be based on the player's stats, win rate, and blunder rate.",
+  "verdictBadge": "according to the roast score, one of: 'COOKED 🔥', 'CHARCOAL 💀', 'MEDIUM RARE 🥩', 'BEYOND SAVING ☢️', 'SUSPICIOUSLY GOOD 🤖'",
   "funniestQuote": "The single funniest one-liner roast sentence from the first-person commentary"
 }`;
 
@@ -78,7 +79,7 @@ Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be
   }
 
   return getOfflineFallbackReport(profile);
-}
+
 
 function getOfflineFallbackReport(profile: PlayerProfile): RoastReport {
   return {
@@ -103,4 +104,4 @@ function getOfflineFallbackReport(profile: PlayerProfile): RoastReport {
     verdictBadge: 'MEDIUM RARE 🥩',
     funniestQuote: "Please set GITHUB_TOKEN in .env.local to unleash the roasts!"
   };
-}
+}}
