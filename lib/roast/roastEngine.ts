@@ -25,9 +25,8 @@ Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be
     "Paragraph 2 in third-person roasting favorite opening and opening knowledge/theory",
     "Paragraph 3 in third-person roasting win rate, wins vs losses, and draw patterns",
     "Paragraph 4 in third-person roasting typical blunder rate and tactical patterns",
-    "Paragraph 5 in third-person roasting preferred time control and time management",
-    "Paragraph 6 third-person devastating final stand-up Roast punchline summary",
-    "Paragraph 7 in third-person roasting the player's chess personality it should be more personal no mercy and savage"
+    "Paragraph 5 third-person devastating final stand-up Roast punchline summary",
+    "Paragraph 6 in third-person roasting the player's chess personality it should be more personal no mercy and savage"
   ],
   "biggestStrength": "Witty backhanded compliment on their secret chess talent (third-person)",
   "biggestWeakness": "Savage comedic observation on their fatal flaw (third-person)",
