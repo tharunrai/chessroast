@@ -17,9 +17,9 @@ export async function generateAIProfileRoast(profile: PlayerProfile): Promise<Ro
 - Favorite Opening: ${profile.favoriteOpening}
 - Preferred Time Control: ${profile.preferredTimeControl}
 
-Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be written in third-PERSON voice — as if the Third person is roastin the chess player  (use "You", "You are", "Your", "You always", "You never"). This makes it funnier and more personal. Return a JSON object matching this exact schema:
+Produce a personalized stand-up Roast roast report. The roast paragraphs MUST be written in third-PERSON voice — as if the Third person is roastin the chess player  (use "You", "You are", "Your", "You always", "You never"). Never mention the player Name. This makes it funnier and more personal. It should be dark, humourous, brutal, no filter. Return a JSON object matching this exact schema:
 {
-  "overview": "Short 2-sentence funny overview of the player in third-person",
+  "overview": "Short 1,2-sentence funny overview of the player in third-person",
   "roastParagraphs": [
     "Paragraph 1 in third-person roasting ELO rating tier and bracket",
     "Paragraph 2 in third-person roasting favorite opening and opening knowledge/theory",

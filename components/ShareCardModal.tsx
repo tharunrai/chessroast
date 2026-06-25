@@ -53,11 +53,11 @@ export function ShareCardModal({ profile, roast, isOpen, onClose }: ShareCardMod
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="relative w-full max-w-2xl glass-panel bg-[#090514] border border-white/5 rounded-3xl p-4 sm:p-6 md:p-8 flex flex-col items-center"
+          className="relative w-full max-w-2xl glass-panel bg-[#090514] border border-[rgba(120,92,255,0.22)] rounded-3xl p-4 sm:p-6 md:p-8 flex flex-col items-center"
         >
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+            className="absolute top-5 right-5 p-2 rounded-full bg-[#17172a] hover:bg-[#23203d] text-gray-400 hover:text-white transition-colors border border-white/5"
           >
             <X className="w-5 h-5" />
           </button>
@@ -143,15 +143,15 @@ export function ShareCardModal({ profile, roast, isOpen, onClose }: ShareCardMod
                   </div>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <div className="rounded-2xl px-3 py-2.5 bg-white/5 border border-white/8 text-center sm:text-left">
+                    <div className="rounded-2xl px-3 py-2.5 bg-[#17172a] border border-white/8 text-center sm:text-left">
                       <p className="text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.28em] sm:tracking-[0.32em] mb-1" style={{ color: 'rgba(255,255,255,0.42)' }}>HP</p>
                       <p className="text-sm font-black text-white whitespace-nowrap">{profile.winRate}%</p>
                     </div>
-                    <div className="rounded-2xl px-3 py-2.5 bg-white/5 border border-white/8 text-center sm:text-left">
+                    <div className="rounded-2xl px-3 py-2.5 bg-[#17172a] border border-white/8 text-center sm:text-left">
                       <p className="text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.28em] sm:tracking-[0.32em] mb-1" style={{ color: 'rgba(255,255,255,0.42)' }}>RATING</p>
                       <p className="text-sm font-black text-white flex items-center justify-center sm:justify-start gap-1 whitespace-nowrap"><Swords size={14} className="text-[#ff8a00]" /> {profile.currentRating}</p>
                     </div>
-                    <div className="rounded-2xl px-3 py-2.5 bg-white/5 border border-white/8 text-center sm:text-left">
+                    <div className="rounded-2xl px-3 py-2.5 bg-[#17172a] border border-white/8 text-center sm:text-left">
                       <p className="text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.28em] sm:tracking-[0.32em] mb-1" style={{ color: 'rgba(255,255,255,0.42)' }}>DEF</p>
                       <p className="text-sm font-black text-white flex items-center justify-center sm:justify-start gap-1 whitespace-nowrap"><Shield size={14} className="text-[#60a5fa]" /> {profile.peakRating}</p>
                     </div>

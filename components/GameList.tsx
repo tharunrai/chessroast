@@ -78,7 +78,7 @@ export function GameList({ games, profile }: GameListProps) {
               animate={{ opacity: 1, y: 0 }}
               className="relative flex flex-col rounded-[1.7rem] p-3 sm:p-4 overflow-hidden transition-all duration-300 hover:-translate-y-1"
               style={{
-                background: 'linear-gradient(180deg, rgba(38,36,33,0.98), rgba(24,22,20,0.98))',
+                background: 'linear-gradient(180deg, rgba(18, 17, 34, 0.98), rgba(13, 12, 28, 0.96))',
                 border: `1px solid ${accent.border}`
               }}
             >

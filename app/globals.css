@@ -88,10 +88,10 @@ body {
 
 /* ─── Glassmorphism Cards ────────────────────────────────────── */
 .glass-panel {
-  background: rgba(22, 22, 42, 0.72);
+  background: linear-gradient(180deg, rgba(18, 17, 34, 0.96) 0%, rgba(13, 12, 28, 0.94) 100%);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(120, 92, 255, 0.22);
 }
 
 .glass-panel-hover {
@@ -99,7 +99,7 @@ body {
 }
 
 .glass-panel-hover:hover {
-  background: rgba(30, 24, 52, 0.82);
+  background: linear-gradient(180deg, rgba(24, 22, 42, 0.98) 0%, rgba(16, 15, 34, 0.96) 100%);
   transform: translateY(-3px);
 }
 

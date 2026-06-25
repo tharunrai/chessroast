@@ -21,8 +21,8 @@ export function RoastReportSection({ roast }: RoastReportSectionProps) {
           transition={{ delay: 0.2 }}
           className="w-full rounded-3xl p-6 sm:p-8 relative overflow-hidden"
           style={{
-            background: '#262421',
-            border: '1px solid rgba(255, 255, 255, 0.08)'
+            background: 'linear-gradient(180deg, rgba(18, 17, 34, 0.98) 0%, rgba(13, 12, 28, 0.96) 100%)',
+            border: '1px solid rgba(255, 85, 0, 0.18)'
           }}
         >
           {/* Section header */}
@@ -88,8 +88,8 @@ export function RoastReportSection({ roast }: RoastReportSectionProps) {
           transition={{ delay: 0.5 }}
           className="rounded-3xl p-6 sm:p-8"
           style={{
-            background: '#262421',
-            border: '1px solid rgba(255, 255, 255, 0.08)'
+            background: 'linear-gradient(180deg, rgba(18, 17, 34, 0.98) 0%, rgba(13, 12, 28, 0.96) 100%)',
+            border: '1px solid rgba(255, 85, 0, 0.18)'
           }}
         >
           <div className="flex items-center gap-3 mb-6">
@@ -107,8 +107,8 @@ export function RoastReportSection({ roast }: RoastReportSectionProps) {
             {roast.improvementTips.map((tip, idx) => (
               <div key={idx} className="rounded-2xl p-5 flex flex-col gap-3 transition-all hover:-translate-y-1 duration-300"
                 style={{
-                  background: '#1d1c1a',
-                  border: '1px solid rgba(255, 85, 0, 0.16)'
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255, 85, 0, 0.18)'
                 }}>
                 <span className="text-3xl font-display font-black text-[#ff5500]">
                   0{idx + 1}

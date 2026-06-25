@@ -22,8 +22,8 @@ export function ProfileOverview({ profile, verdictBadge, playstyle, onShareClick
         transition={{ duration: 0.6 }}
         className="w-full rounded-3xl p-6 sm:p-10 mb-6 relative overflow-hidden"
         style={{
-          background: '#262421',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
+          background: 'linear-gradient(180deg, rgba(18, 17, 34, 0.98) 0%, rgba(13, 12, 28, 0.96) 100%)',
+          border: '1px solid rgba(120, 92, 255, 0.18)'
         }}
       >
 
@@ -112,8 +112,8 @@ export function ProfileOverview({ profile, verdictBadge, playstyle, onShareClick
             transition={{ delay: 0.1 }}
             className="p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
             style={{
-              background: '#262421',
-              border: '1px solid rgba(255, 255, 255, 0.08)'
+              background: 'linear-gradient(180deg, rgba(18, 17, 34, 0.98) 0%, rgba(13, 12, 28, 0.96) 100%)',
+              border: '1px solid rgba(191, 90, 242, 0.22)'
             }}
           >
             <div>
