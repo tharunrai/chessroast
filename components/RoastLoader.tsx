@@ -60,7 +60,7 @@ export function RoastLoader() {
       >
         {/* Top Flame Animation */}
         <div className="relative mb-6 flex justify-center">
-          <div className="w-20 h-20 rounded-2xl flex items-center justify-center relative"
+          <div className="w-20 h-20 rounded-full flex items-center justify-center relative"
             style={{
               background: '#1b1a18',
               border: '1px solid rgba(255, 255, 255, 0.05)'
@@ -68,9 +68,9 @@ export function RoastLoader() {
             <Flame size={38} className="text-[#ff5500] animate-pulse" />
             
             {/* Spinning tactical radar ring */}
-            <div className="absolute inset-0 border border-dashed border-[#ff5500]/40 rounded-2xl animate-spin" style={{ animationDuration: '8s' }} />
+            <div className="absolute inset-0 border border-dashed border-[#ff5500]/40 rounded-full animate-spin" style={{ animationDuration: '8s' }} />
           </div>
-          <div className="absolute inset-0 w-20 h-20 mx-auto rounded-2xl border border-orange-500/20 animate-ping pointer-events-none" />
+          <div className="absolute inset-0 w-20 h-20 mx-auto rounded-full border border-orange-500/20 animate-ping pointer-events-none" />
         </div>
 
         <h3 className="text-2xl sm:text-3xl font-display font-black tracking-wide mb-1 uppercase text-gradient-fire">

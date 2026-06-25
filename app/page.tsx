@@ -1,17 +1,16 @@
 'use client';
 // Clean background reloaded without orbs or radial circles
 
-import React, { useState, useEffect } from 'react';
-import { ChessGame, GameAnalysisResult, Platform, PlayerProfile, RoastReport } from '@/lib/types';
+import React, { useState } from 'react';
+import { ChessGame, Platform, PlayerProfile, RoastReport } from '@/lib/types';
 import { Navbar } from '@/components/Navbar';
 import { HeroInput } from '@/components/HeroInput';
 import { ProfileOverview } from '@/components/ProfileOverview';
 import { RoastReportSection } from '@/components/RoastReportSection';
 import { GameList } from '@/components/GameList';
 import { RoastLoader } from '@/components/RoastLoader';
-import { GameRoastModal } from '@/components/GameRoastModal';
 import { ShareCardModal } from '@/components/ShareCardModal';
-import { AlertCircle, Flame } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 export default function Home() {
   const [step, setStep] = useState<'search' | 'loading' | 'dashboard'>('search');
@@ -20,11 +19,6 @@ export default function Home() {
   const [profile, setProfile] = useState<PlayerProfile | null>(null);
   const [games, setGames] = useState<ChessGame[]>([]);
   const [roast, setRoast] = useState<RoastReport | null>(null);
-
-  const [selectedGame, setSelectedGame] = useState<ChessGame | null>(null);
-  const [gameAnalysis, setGameAnalysis] = useState<GameAnalysisResult | null>(null);
-  const [isGameModalOpen, setIsGameModalOpen] = useState(false);
-  const [isLoadingGameId, setIsLoadingGameId] = useState<string | undefined>(undefined);
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -68,33 +62,6 @@ export default function Home() {
       const msg = err instanceof Error ? err.message : 'Something went wrong during live fetch';
       setErrorMessage(msg);
       setStep('search');
-    }
-  };
-
-  const handleRoastSingleGame = async (game: ChessGame) => {
-    setIsLoadingGameId(game.id);
-    setSelectedGame(game);
-
-    try {
-      const res = await fetch('/api/roast-game', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          pgn: game.pgn,
-          playerColor: game.playerColor,
-          opponentName: game.opponentName
-        })
-      });
-      const data = await res.json();
-
-      if (res.ok && data.analysis) {
-        setGameAnalysis(data.analysis);
-        setIsGameModalOpen(true);
-      }
-    } catch (err) {
-      console.error('Game review error:', err);
-    } finally {
-      setIsLoadingGameId(undefined);
     }
   };
 
@@ -168,20 +135,11 @@ export default function Home() {
 
             <GameList
               games={games}
-              onRoastGame={handleRoastSingleGame}
-              isLoadingGameId={isLoadingGameId}
+              profile={profile}
             />
           </motion.div>
         )}
       </main>
-
-      {/* Modals */}
-      <GameRoastModal
-        game={selectedGame}
-        analysis={gameAnalysis}
-        isOpen={isGameModalOpen}
-        onClose={() => setIsGameModalOpen(false)}
-      />
 
       <ShareCardModal
         profile={profile}
