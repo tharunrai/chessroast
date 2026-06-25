@@ -1,0 +1,201 @@
+/* CSS Cleaned up - no ambient orbs or glows */
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #1b1a18;
+    --foreground: #f8f9fb;
+    --card: #262421;
+    --card-foreground: #ffffff;
+    --primary: #ff5500;
+    --secondary: #bf5af2;
+    --accent: #30d158;
+    --danger: #ff3b30;
+    --warning: #ff9f0a;
+    --info: #0a84ff;
+    --teal: #5ac8fa;
+    --pink: #ff375f;
+    --border: rgba(255, 255, 255, 0.1);
+    --ring: #ff5500;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes drift-a {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(8%, 12%) scale(1.15); }
+    66% { transform: translate(-5%, 6%) scale(0.95); }
+    100% { transform: translate(3%, -8%) scale(1.05); }
+  }
+  @keyframes drift-b {
+    0% { transform: translate(0, 0) scale(1.1); }
+    33% { transform: translate(-10%, -8%) scale(0.92); }
+    66% { transform: translate(6%, -14%) scale(1.12); }
+    100% { transform: translate(-3%, 5%) scale(1); }
+  }
+  @keyframes drift-c {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-8%, 10%) scale(1.08); }
+    100% { transform: translate(5%, -5%) scale(0.96); }
+  }
+}
+
+/* ─── Background ────────────────────────────────────────────── */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  font-family: var(--font-sans);
+}
+
+
+
+/* ─── Glassmorphism Cards ────────────────────────────────────── */
+.glass-panel {
+  background: rgba(22, 22, 42, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(30, 24, 52, 0.82);
+  transform: translateY(-3px);
+}
+
+/* ─── iOS-Style Vibrant Gradient Cards ──────────────────────── */
+.card-orange {
+  background: linear-gradient(135deg, rgba(255, 85, 0, 0.25) 0%, rgba(255, 159, 10, 0.12) 100%);
+  border: 1px solid rgba(255, 85, 0, 0.3);
+}
+
+.card-purple {
+  background: linear-gradient(135deg, rgba(191, 90, 242, 0.25) 0%, rgba(94, 92, 230, 0.12) 100%);
+  border: 1px solid rgba(191, 90, 242, 0.3);
+}
+
+.card-green {
+  background: linear-gradient(135deg, rgba(48, 209, 88, 0.22) 0%, rgba(90, 200, 250, 0.1) 100%);
+  border: 1px solid rgba(48, 209, 88, 0.3);
+}
+
+.card-teal {
+  background: linear-gradient(135deg, rgba(90, 200, 250, 0.22) 0%, rgba(10, 132, 255, 0.1) 100%);
+  border: 1px solid rgba(90, 200, 250, 0.3);
+}
+
+/* ─── Text Utilities ─────────────────────────────────────────── */
+/* Primary content – always bright white for maximum contrast */
+.text-primary-content {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.text-secondary-content {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.text-muted-content {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+/* iOS-style vibrant color text helpers */
+.text-ios-orange  { color: #ff6b35; }
+.text-ios-purple  { color: #d070f0; }
+.text-ios-green   { color: #32d870; }
+.text-ios-blue    { color: #4da6ff; }
+.text-ios-teal    { color: #60d0fa; }
+.text-ios-pink    { color: #ff5588; }
+.text-ios-yellow  { color: #ffcc00; }
+
+/* Gradient headings */
+.text-gradient-fire {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff9f0a 50%, #ffcc00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(135deg, #bf5af2 0%, #5e5ce6 50%, #0a84ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-nature {
+  background: linear-gradient(135deg, #30d158 0%, #5ac8fa 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+/* ─── iOS-Style Pill Badges ──────────────────────────────────── */
+.badge-win {
+  background: rgba(48, 209, 88, 0.18);
+  color: #32d870;
+  border: 1px solid rgba(48, 209, 88, 0.35);
+}
+.badge-loss {
+  background: rgba(255, 59, 48, 0.18);
+  color: #ff5555;
+  border: 1px solid rgba(255, 59, 48, 0.35);
+}
+.badge-draw {
+  background: rgba(255, 159, 10, 0.18);
+  color: #ffb830;
+  border: 1px solid rgba(255, 159, 10, 0.35);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb {
+  background: rgba(191, 90, 242, 0.35);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 85, 0, 0.55);
+}
