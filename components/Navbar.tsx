@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { RefreshCw } from 'lucide-react';
-import { ThreeDIcon } from './ThreeDIcon';
+import { RefreshCw, Flame, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   onReset?: () => void;
@@ -25,15 +24,15 @@ export function Navbar({ onReset, showReset }: NavbarProps) {
             background: 'linear-gradient(145deg, #ff6b35, #ff3b30)',
             border: '1px solid rgba(255,255,255,0.1)'
           }}>
-            <ThreeDIcon name="flame" size={22} />
+            <Flame size={22} className="text-white" />
           </div>
           <div>
             <h1 className="text-lg sm:text-xl font-display font-black tracking-tight text-gradient-fire">
               CHESS ROASTER
             </h1>
             <p className="text-[10px] text-muted-content font-mono tracking-widest uppercase flex items-center gap-1">
-              <ThreeDIcon name="sparkles" size={10} />
-              <span>AI Comedy Engine</span>
+              <Sparkles size={10} className="text-gray-400" />
+              <span>AI Roast Engine</span>
             </p>
           </div>
         </div>

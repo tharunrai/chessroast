@@ -21,8 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chess Roaster 🔥 | Spotify Wrapped + Stand-up Comedy for Chess Players",
-  description: "Get roasted by dynamic AI commentary based on your Chess.com and Lichess profiles. Ply-by-ply match analysis, neon wrap-up cards, and pure comedic comedy.",
+  title: "Chess Roaster 🔥 | Spotify Wrapped + Stand-up Roast for Chess Players",
+  description: "Get roasted by dynamic AI commentary based on your Chess.com and Lichess profiles. Ply-by-ply match analysis, neon wrap-up cards, and pure comedic Roast.",
   metadataBase: new URL("https://chessroaster.com"),
   openGraph: {
     title: "Chess Roaster 🔥 | Spotify Wrapped for Chess",

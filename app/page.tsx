@@ -8,24 +8,13 @@ import { HeroInput } from '@/components/HeroInput';
 import { ProfileOverview } from '@/components/ProfileOverview';
 import { RoastReportSection } from '@/components/RoastReportSection';
 import { GameList } from '@/components/GameList';
+import { RoastLoader } from '@/components/RoastLoader';
 import { GameRoastModal } from '@/components/GameRoastModal';
 import { ShareCardModal } from '@/components/ShareCardModal';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Flame } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThreeDIcon } from '@/components/ThreeDIcon';
-
-const LOADING_QUOTES = [
-  "Connecting to Stockfish comedy cluster...",
-  "Parsing your questionable tactical crimes...",
-  "Counting hanging queens in archive data...",
-  "Consulting Magnus Carlsen's eyebrow raises...",
-  "Calculating blunder frequencies on rank 8...",
-  "Preparing emotionally devastating roast metaphors..."
-];
-
 export default function Home() {
   const [step, setStep] = useState<'search' | 'loading' | 'dashboard'>('search');
-  const [loadingQuoteIdx, setLoadingQuoteIdx] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [profile, setProfile] = useState<PlayerProfile | null>(null);
@@ -39,25 +28,13 @@ export default function Home() {
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  // Rotate funny loading quotes
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (step === 'loading') {
-      interval = setInterval(() => {
-        setLoadingQuoteIdx((prev) => (prev + 1) % LOADING_QUOTES.length);
-      }, 1200);
-    }
-    return () => clearInterval(interval);
-  }, [step]);
-
   const handleRoastRequest = async (platform: Platform, username: string) => {
     setErrorMessage(null);
     setStep('loading');
-    setLoadingQuoteIdx(0);
 
     try {
       // 1. Fetch live player data
-      const fetchUrl = platform === 'chesscom' 
+      const fetchUrl = platform === 'chesscom'
         ? `/api/chesscom?username=${encodeURIComponent(username)}`
         : `/api/lichess?username=${encodeURIComponent(username)}`;
 
@@ -152,8 +129,8 @@ export default function Home() {
               <div className="text-sm font-semibold flex-1 text-white">
                 {errorMessage}
               </div>
-              <button 
-                onClick={() => setErrorMessage(null)} 
+              <button
+                onClick={() => setErrorMessage(null)}
                 className="text-xs font-mono underline hover:opacity-85 text-ios-pink"
               >
                 Dismiss
@@ -169,62 +146,7 @@ export default function Home() {
 
         {/* State 2: Hilarious Loading Animation */}
         {step === 'loading' && (
-          <div className="w-full max-w-xl mx-auto px-4 py-24 text-center flex flex-col items-center">
-            {/* Animated orb icon */}
-            <div className="relative mb-8">
-              <div className="w-24 h-24 rounded-3xl flex items-center justify-center"
-                style={{
-                  background: '#262421',
-                  border: '1px solid rgba(255, 255, 255, 0.08)'
-                }}>
-                <ThreeDIcon name="flame" size={44} className="animate-pulse" />
-              </div>
-              <div className="absolute inset-0 rounded-3xl border-2 border-orange-500/20 animate-ping" />
-            </div>
-
-            <h3 className="text-3xl sm:text-4xl font-display font-black tracking-wide mb-3 uppercase text-gradient-fire">
-              ANALYZING...
-            </h3>
-            <p className="text-xs font-mono uppercase tracking-widest mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              Compiling your tactical crimes
-            </p>
-
-            {/* Colorful bouncing dots */}
-            <div className="flex gap-2 mb-8">
-              {['#ff5500','#bf5af2','#5ac8fa','#30d158'].map((c, i) => (
-                <div key={i} className="w-2.5 h-2.5 rounded-full" style={{
-                  background: c,
-                  animation: `bounce 0.9s ease-in-out ${i * 0.15}s infinite alternate`
-                }} />
-              ))}
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={loadingQuoteIdx}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="text-base sm:text-lg font-mono font-bold max-w-md min-h-[52px] flex items-center justify-center rounded-2xl px-5 py-3"
-                style={{
-                  color: '#ffb830',
-                  background: 'rgba(255,159,10,0.08)',
-                  border: '1px solid rgba(255,159,10,0.2)'
-                }}
-              >
-                "{LOADING_QUOTES[loadingQuoteIdx]}"
-              </motion.p>
-            </AnimatePresence>
-
-            {/* Multi-color progress shimmer */}
-            <div className="w-56 h-1.5 rounded-full overflow-hidden mt-8" style={{ background: 'rgba(255,255,255,0.06)' }}>
-              <div className="w-1/2 h-full rounded-full animate-shimmer" style={{
-                backgroundImage: 'linear-gradient(90deg, #ff5500, #bf5af2, #5ac8fa, #30d158, #ff5500)',
-                backgroundSize: '200% 100%'
-              }} />
-            </div>
-          </div>
+          <RoastLoader />
         )}
 
         {/* State 3: Roasted Dashboard */}
@@ -238,10 +160,11 @@ export default function Home() {
             <ProfileOverview
               profile={profile}
               verdictBadge={roast.verdictBadge}
+              playstyle={roast.playstyle}
               onShareClick={() => setIsShareModalOpen(true)}
             />
 
-            <RoastReportSection roast={roast} />
+            <RoastReportSection roast={roast} profile={profile} />
 
             <GameList
               games={games}

@@ -55,7 +55,7 @@ export interface MoveHighlight {
   moveNumber: number;
   san: string;
   comment: string;
-  type: 'blunder' | 'mistake' | 'brilliant' | 'suspicious' | 'comedy';
+  type: 'blunder' | 'mistake' | 'brilliant' | 'suspicious' | 'Roast';
 }
 
 export interface GameAnalysisResult {

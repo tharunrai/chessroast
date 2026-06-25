@@ -2,11 +2,10 @@
 
 import React, { useRef, useState } from 'react';
 import { PlayerProfile, RoastReport } from '@/lib/types';
-import { X, Download } from 'lucide-react';
+import { X, Download, Share, Flame, Sparkles } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThreeDIcon } from './ThreeDIcon';
 
 interface ShareCardModalProps {
   profile: PlayerProfile | null;
@@ -63,7 +62,7 @@ export function ShareCardModal({ profile, roast, isOpen, onClose }: ShareCardMod
           </button>
 
           <h3 className="text-xl font-display font-black text-white tracking-wide mb-2 flex items-center gap-2">
-            <ThreeDIcon name="share" size={20} /> SHAREABLE ROAST CARD
+            <Share size={20} className="text-white" /> SHAREABLE ROAST CARD
           </h3>
           <p className="text-xs text-gray-450 mb-6 font-mono text-center">
             Download this card and flex your tactical crimes to friends
@@ -80,7 +79,7 @@ export function ShareCardModal({ profile, roast, isOpen, onClose }: ShareCardMod
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#ff5500]/20 to-[#ffbb00]/10 border border-[#ff5500]/30 flex items-center justify-center">
-                  <ThreeDIcon name="flame" size={18} />
+                  <Flame size={18} className="text-orange-500" />
                 </div>
                 <span className="font-display font-black tracking-widest text-white text-sm">CHESS ROASTER</span>
               </div>
@@ -113,15 +112,7 @@ export function ShareCardModal({ profile, roast, isOpen, onClose }: ShareCardMod
               </div>
             </div>
 
-            {/* Biggest Talent */}
-            <div className="mb-6">
-              <p className="text-[10px] font-mono text-[#22c55e] uppercase font-extrabold mb-1 flex items-center gap-1.5">
-                <ThreeDIcon name="sparkles" size={14} /> Secret Talent
-              </p>
-              <p className="text-sm font-bold text-gray-200 leading-snug">
-                "{roast.biggestStrength}"
-              </p>
-            </div>
+
 
             {/* Funniest Roast Quote */}
             <div className="bg-white/5 rounded-xl p-4 mb-8 border border-white/5">

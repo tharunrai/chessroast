@@ -1,17 +1,18 @@
 'use client';
 
 import React from 'react';
-import { PlayerProfile } from '@/lib/types';
+import { PlayerProfile, PlaystyleAnalysis } from '@/lib/types';
 import { motion } from 'framer-motion';
-import { ThreeDIcon } from './ThreeDIcon';
+import { Share, Trophy, TrendingUp, Swords, BookOpen, Clock, Gauge, Flame } from 'lucide-react';
 
 interface ProfileOverviewProps {
   profile: PlayerProfile;
   verdictBadge: string;
+  playstyle?: PlaystyleAnalysis;
   onShareClick: () => void;
 }
 
-export function ProfileOverview({ profile, verdictBadge, onShareClick }: ProfileOverviewProps) {
+export function ProfileOverview({ profile, verdictBadge, playstyle, onShareClick }: ProfileOverviewProps) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-12 relative z-10">
       {/* Hero Banner */}
@@ -94,112 +95,172 @@ export function ProfileOverview({ profile, verdictBadge, onShareClick }: Profile
                 background: '#bf5af2'
               }}
             >
-              <ThreeDIcon name="share" size={18} />
+              <Share size={18} />
               <span>Export Roast Card</span>
             </button>
           </div>
         </div>
       </motion.div>
 
-      {/* Stats grid — each card has distinct iOS color */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {/* Rating card — orange */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
-          style={{ borderColor: 'rgba(255,107,53,0.25)' }}
-        >
+      {/* Grid containing Playstyle (left side, 1 col) and Stats (right side, 2 cols in 2x2 grid) */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
+        {/* Playstyle card — purple border accent */}
+        {playstyle && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
+            style={{
+              background: '#262421',
+              border: '1px solid rgba(255, 255, 255, 0.08)'
+            }}
+          >
+            <div>
+              <div className="flex items-center gap-2 mb-5">
+                <Gauge size={22} className="text-gray-300" />
+                <h4 className="font-display font-black text-white text-sm uppercase tracking-wide">Playstyle</h4>
+              </div>
 
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Rating</span>
-            <ThreeDIcon name="trophy" size={30} />
-          </div>
-          <div>
-            <div className="text-4xl font-display font-black text-white mb-1">
-              {profile.currentRating}
+              <div className="space-y-4">
+                {[
+                  { label: 'Aggression', value: playstyle.aggression, color: '#ff5500' },
+                  { label: 'Tactical Vision', value: playstyle.tacticalAwareness, color: '#bf5af2' },
+                  { label: 'Endgame Quality', value: playstyle.endgameQuality, color: '#30d158' },
+                ].map(({ label, value, color }) => (
+                  <div key={label}>
+                    <div className="flex justify-between mb-1.5">
+                      <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.6)' }}>{label}</span>
+                      <span className="text-xs font-mono font-bold" style={{ color }}>{value}/10</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                      <div
+                        style={{ width: `${value * 10}%`, background: color }}
+                        className="h-full rounded-full transition-all duration-700"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <p className="text-xs font-mono flex items-center gap-1.5" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              <ThreeDIcon name="trending" size={13} />
-              <span>Peak: <span className="text-ios-yellow font-semibold">{profile.peakRating}</span></span>
-            </p>
-          </div>
-        </motion.div>
 
-        {/* Win Rate card — green */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
-          style={{ borderColor: 'rgba(48,209,88,0.25)' }}
-        >
+            {/* Combat Rating summary */}
+            {(() => {
+              const avg = Math.round((playstyle.aggression + playstyle.tacticalAwareness + playstyle.endgameQuality) / 3);
+              const label = avg >= 8 ? 'Elite Destroyer' : avg >= 6 ? 'Solid Tactician' : avg >= 4 ? 'Average Joe' : 'Humble Beginner';
+              const color = avg >= 8 ? '#ff5500' : avg >= 6 ? '#bf5af2' : avg >= 4 ? '#5ac8fa' : '#30d158';
+              return (
+                <div className="mt-5 pt-5 flex items-center justify-between" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-widest mb-0.5" style={{ color: 'rgba(255,255,255,0.4)' }}>Combat Rating</p>
+                    <p className="text-xs font-mono font-bold" style={{ color: 'rgba(255,255,255,0.7)' }}>{label}</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-display font-black text-xl"
+                    style={{ background: `${color}18`, border: `1px solid ${color}50`, color }}>
+                    {avg}
+                  </div>
+                </div>
+              );
+            })()}
+          </motion.div>
+        )}
 
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Win Rate</span>
-            <ThreeDIcon name="swords" size={30} />
-          </div>
-          <div>
-            <div className="text-4xl font-display font-black text-white mb-2">
-              {profile.winRate}%
+        {/* Stats grid — 4 cards in 2x2 grid */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 ${playstyle ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+          {/* Rating card — orange */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.12 }}
+            className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
+            style={{ borderColor: 'rgba(255,107,53,0.25)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Rating</span>
+              <Trophy size={30} className="text-orange-400" />
             </div>
-            {/* Segmented progress bar */}
-            <div className="w-full h-2 rounded-full overflow-hidden flex gap-0.5 mb-1.5" style={{ background: 'rgba(255,255,255,0.08)' }}>
-              <div style={{ width: `${profile.winRate}%`, background: 'linear-gradient(90deg, #30d158, #32d870)' }} className="h-full rounded-l-full" />
-              <div style={{ width: `${100 - profile.winRate}%`, background: 'linear-gradient(90deg, #ff3b30, #ff5555)' }} className="h-full rounded-r-full" />
+            <div>
+              <div className="text-4xl font-display font-black text-white mb-1">
+                {profile.currentRating}
+              </div>
+              <p className="text-xs font-mono flex items-center gap-1.5" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                <TrendingUp size={13} className="text-yellow-400" />
+                <span>Peak: <span className="text-ios-yellow font-semibold">{profile.peakRating}</span></span>
+              </p>
             </div>
-            <div className="flex justify-between text-[10px] font-mono font-semibold">
-              <span className="text-ios-green">{profile.wins}W</span>
-              <span style={{ color: 'rgba(255,255,255,0.4)' }}>{profile.draws}D</span>
-              <span className="text-ios-pink">{profile.losses}L</span>
+          </motion.div>
+
+          {/* Win Rate card — green */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.14 }}
+            className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
+            style={{ borderColor: 'rgba(48,209,88,0.25)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Win Rate</span>
+              <Swords size={30} className="text-green-400" />
             </div>
-          </div>
-        </motion.div>
-
-        {/* Opening card — purple */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
-          style={{ borderColor: 'rgba(191,90,242,0.25)' }}
-        >
-
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Fav Opening</span>
-            <ThreeDIcon name="book" size={30} />
-          </div>
-          <div>
-            <div className="text-lg font-display font-black text-white leading-snug line-clamp-2 mb-1">
-              {profile.favoriteOpening}
+            <div>
+              <div className="text-4xl font-display font-black text-white mb-2">
+                {profile.winRate}%
+              </div>
+              {/* Segmented progress bar */}
+              <div className="w-full h-2 rounded-full overflow-hidden flex gap-0.5 mb-1.5" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                <div style={{ width: `${profile.winRate}%`, background: 'linear-gradient(90deg, #30d158, #32d870)' }} className="h-full rounded-l-full" />
+                <div style={{ width: `${100 - profile.winRate}%`, background: 'linear-gradient(90deg, #ff3b30, #ff5555)' }} className="h-full rounded-r-full" />
+              </div>
+              <div className="flex justify-between text-[10px] font-mono font-semibold">
+                <span className="text-ios-green">{profile.wins}W</span>
+                <span style={{ color: 'rgba(255,255,255,0.4)' }}>{profile.draws}D</span>
+                <span className="text-ios-pink">{profile.losses}L</span>
+              </div>
             </div>
-            <p className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.45)' }}>Theory: Suspicious 🤔</p>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Time Control card — teal */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
-          style={{ borderColor: 'rgba(90,200,250,0.25)' }}
-        >
-
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Preferred Mode</span>
-            <ThreeDIcon name="clock" size={30} />
-          </div>
-          <div>
-            <div className="text-xl font-display font-black text-white leading-snug mb-1">
-              {profile.preferredTimeControl}
+          {/* Opening card — purple */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.16 }}
+            className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
+            style={{ borderColor: 'rgba(191,90,242,0.25)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Fav Opening</span>
+              <BookOpen size={30} className="text-purple-400" />
             </div>
-            <p className="text-xs font-mono flex items-center gap-1" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              <ThreeDIcon name="flame" size={12} /> Chaos factor: High
-            </p>
-          </div>
-        </motion.div>
+            <div>
+              <div className="text-lg font-display font-black text-white leading-snug line-clamp-2 mb-1">
+                {profile.favoriteOpening}
+              </div>
+              <p className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.45)' }}>Theory: Suspicious 🤔</p>
+            </div>
+          </motion.div>
+
+          {/* Time Control card — teal */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden"
+            style={{ borderColor: 'rgba(90,200,250,0.25)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.5)' }}>Preferred Mode</span>
+              <Clock size={30} className="text-teal-400" />
+            </div>
+            <div>
+              <div className="text-xl font-display font-black text-white leading-snug mb-1">
+                {profile.preferredTimeControl}
+              </div>
+              <p className="text-xs font-mono flex items-center gap-1" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                <Flame size={12} className="text-orange-500" /> Chaos factor: High
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

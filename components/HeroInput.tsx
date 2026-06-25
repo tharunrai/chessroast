@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { Platform } from '@/lib/types';
-import { Search, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight, Flame, Dices } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ThreeDIcon } from './ThreeDIcon';
 
 interface HeroInputProps {
   onSubmit: (platform: Platform, username: string) => void;
@@ -36,7 +35,7 @@ export function HeroInput({ onSubmit, isLoading }: HeroInputProps) {
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-12 sm:py-20 flex flex-col items-center text-center">
-  
+
 
       {/* Hero headline */}
       <motion.h2
@@ -54,7 +53,7 @@ export function HeroInput({ onSubmit, isLoading }: HeroInputProps) {
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
-        }}>AI COMEDY</span>
+        }}>AI Roast</span>
       </motion.h2>
 
       <motion.p
@@ -152,7 +151,7 @@ export function HeroInput({ onSubmit, isLoading }: HeroInputProps) {
             ) : (
               <>
                 <span>ROAST ME</span>
-                <ThreeDIcon name="flame" size={18} />
+                <Flame className="w-5 h-5 text-white/90" />
               </>
             )}
           </button>
@@ -167,7 +166,7 @@ export function HeroInput({ onSubmit, isLoading }: HeroInputProps) {
         className="flex flex-wrap items-center justify-center gap-2"
       >
         <span className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.4)' }}>
-          <ThreeDIcon name="dice" size={13} /> Try:
+          <Dices className="w-3.5 h-3.5 opacity-60" /> Try:
         </span>
         {SAMPLE_USERS[platform].map((sample) => (
           <button

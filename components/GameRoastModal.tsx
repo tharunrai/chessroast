@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { ChessGame, GameAnalysisResult } from '@/lib/types';
-import { X } from 'lucide-react';
+import { X, Flame, Skull, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThreeDIcon } from './ThreeDIcon';
 
 interface GameRoastModalProps {
   game: ChessGame | null;
@@ -50,7 +49,7 @@ export function GameRoastModal({ game, analysis, isOpen, onClose }: GameRoastMod
             <div>
               <div className="flex items-center gap-2 mb-1.5 text-xs font-mono font-bold uppercase tracking-wide"
                 style={{ color: '#ff6b35' }}>
-                <ThreeDIcon name="flame" size={15} />
+                <Flame size={15} />
                 <span>AI Game Review</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-display font-black text-white tracking-tight">
@@ -98,7 +97,7 @@ export function GameRoastModal({ game, analysis, isOpen, onClose }: GameRoastMod
             <div>
               <h4 className="flex items-center gap-2 text-xs font-display font-black uppercase tracking-widest mb-3"
                 style={{ color: '#ff5555' }}>
-                <ThreeDIcon name="skull" size={17} />
+                <Skull size={17} />
                 <span>Biggest Blunders</span>
               </h4>
               <div className="space-y-2.5">
@@ -116,7 +115,7 @@ export function GameRoastModal({ game, analysis, isOpen, onClose }: GameRoastMod
             <div>
               <h4 className="flex items-center gap-2 text-xs font-display font-black uppercase tracking-widest mb-3"
                 style={{ color: '#d070f0' }}>
-                <ThreeDIcon name="sparkles" size={17} />
+                <Sparkles size={17} />
                 <span>Move Commentary</span>
               </h4>
               <div className="space-y-2.5">

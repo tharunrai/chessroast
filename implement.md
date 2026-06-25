@@ -8,7 +8,7 @@ Unlike traditional chess analysis tools, the focus is entertainment first, impro
 
 The website should feel like:
 
-"Spotify Wrapped + Chess Analysis + Stand-up Comedy"
+"Spotify Wrapped + Chess Analysis + Stand-up Roast"
 
 ---
 

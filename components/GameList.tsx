@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { ChessGame } from '@/lib/types';
-import { Calendar, ExternalLink } from 'lucide-react';
+import { Calendar, ExternalLink, Swords, Target, Flame } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ThreeDIcon } from './ThreeDIcon';
 
 interface GameListProps {
   games: ChessGame[];
@@ -32,7 +31,7 @@ export function GameList({ games, onRoastGame, isLoadingGameId }: GameListProps)
             background: 'linear-gradient(135deg, rgba(255,59,48,0.25), rgba(255,107,53,0.12))',
             border: '1px solid rgba(255,59,48,0.35)'
           }}>
-          <ThreeDIcon name="swords" size={24} />
+          <Swords size={24} className="text-red-400" />
         </div>
         <div>
           <h3 className="text-2xl font-display font-black text-white tracking-wide">RECENT MATCHES</h3>
@@ -103,7 +102,7 @@ export function GameList({ games, onRoastGame, isLoadingGameId }: GameListProps)
                   <div className="flex items-center justify-between px-3 py-2 rounded-xl"
                     style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}>
                     <span className="flex items-center gap-1.5 text-[11px] font-mono" style={{ color: 'rgba(255,255,255,0.48)' }}>
-                      <ThreeDIcon name="target" size={13} /> Accuracy
+                      <Target size={13} /> Accuracy
                     </span>
                     <span className="text-xs font-black font-mono" style={{
                       color: g.accuracy > 85 ? '#32d870' : g.accuracy < 60 ? '#ff5555' : '#ffb830'
@@ -126,7 +125,7 @@ export function GameList({ games, onRoastGame, isLoadingGameId }: GameListProps)
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
-                      <ThreeDIcon name="flame" size={15} />
+                      <Flame size={15} />
                       <span>ROAST GAME</span>
                     </>
                   )}
