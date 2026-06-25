@@ -98,7 +98,7 @@ export function RoastReportSection({ roast }: RoastReportSectionProps) {
               <Flame size={22} className="text-[#ff5500]" />
             </div>
             <div>
-              <h3 className="text-xl font-display font-black text-white tracking-wide">DARK ROAST IMPROVEMENT</h3>
+              <h3 className="text-xl font-display font-black text-white tracking-wide">SOME IMPROVEMENT</h3>
               <p className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.42)' }}>How you can stop giving the AI easy material</p>
             </div>
           </div>
